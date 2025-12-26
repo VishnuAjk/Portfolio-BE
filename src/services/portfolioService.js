@@ -45,7 +45,20 @@ const updateSection = async ({ section, payload, ownerId }) => {
   }
 
   const portfolio = await getOrCreatePortfolio(ownerId);
-  portfolio.set(section, payload);
+  if (section === 'about' && typeof payload.imageUrl === 'string') {
+    if (payload.imageUrl.trim().startsWith('data:')) {
+      throw new ApiError(400, 'Base64 image data is not accepted for about.imageUrl');
+    }
+  }
+
+  const currentSection =
+    section === 'about' && portfolio.get(section)
+      ? portfolio.get(section).toObject?.() || portfolio.get(section)
+      : null;
+  const nextPayload =
+    section === 'about' && currentSection ? { ...currentSection, ...payload } : payload;
+
+  portfolio.set(section, nextPayload);
 
   await portfolio.save();
 

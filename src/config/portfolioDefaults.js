@@ -1,6 +1,13 @@
 const portfolioDefaults = {
+  showcase: {
+    title: '',
+    subtitle: '',
+    logoUrl: '',
+    profileImageUrl: '',
+  },
   about: {
     summary: '',
+    imageUrl: '',
     highlights: [],
   },
   skills: {
