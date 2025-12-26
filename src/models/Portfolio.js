@@ -58,6 +58,7 @@ const projectsSchema = new mongoose.Schema(
         link: { type: String, trim: true },
         summary: { type: String, trim: true },
         stack: [{ type: String, trim: true }],
+        image: { type: String, trim: true },
       },
     ],
   },
