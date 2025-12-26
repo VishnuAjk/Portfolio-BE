@@ -1,5 +1,15 @@
 const mongoose = require('mongoose');
 
+const showcaseSchema = new mongoose.Schema(
+  {
+    title: { type: String, trim: true },
+    subtitle: { type: String, trim: true },
+    logoUrl: { type: String, trim: true },
+    profileImageUrl: { type: String, trim: true },
+  },
+  { _id: false }
+);
+
 const skillsSchema = new mongoose.Schema(
   {
     headline: { type: String, trim: true },
@@ -85,8 +95,10 @@ const contactSchema = new mongoose.Schema(
 
 const portfolioSchema = new mongoose.Schema(
   {
+    showcase: showcaseSchema,
     about: {
       summary: { type: String, trim: true },
+      imageUrl: { type: String, trim: true },
       highlights: [{ type: String, trim: true }],
     },
     skills: skillsSchema,
