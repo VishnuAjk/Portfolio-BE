@@ -39,6 +39,14 @@ if (env.nodeEnv !== 'test') {
   app.use(morgan('dev'));
 }
 
+app.get('/', (_req, res) => {
+  res.json({
+    name: 'portfolio-be',
+    status: 'ok',
+    health: '/health',
+  });
+});
+
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });

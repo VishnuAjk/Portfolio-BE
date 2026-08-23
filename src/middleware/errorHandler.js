@@ -8,7 +8,7 @@ const errorHandler = (err, req, res, _next) => {
   const statusCode = err.statusCode || 500;
   const message = err.isOperational ? err.message : 'Something went wrong';
 
-  if (process.env.NODE_ENV !== 'test') {
+  if (process.env.NODE_ENV !== 'test' && (!err.isOperational || statusCode >= 500)) {
     console.error(err);
   }
 
